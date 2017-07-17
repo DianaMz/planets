@@ -1,7 +1,6 @@
 // Librerias
-include <stdio.h>
-include <stdlib.h>
-inclde <string.h>
-
+#include <stdio.h>
+#include <stdlib.h>
+#inclde <string.h>
 
 
