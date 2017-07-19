@@ -4,28 +4,55 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define Np 10
+
 // Leer datos archivo
-int main()
+
+void main()
 {
+
 	FILE *coordenadas;
 	coordenadas = fopen("coordinates(2).csv", "r");
 
-	const char *delimiter;
-	delimiter = ",";
-
 	int l = 500;
 	char linea_temp[l];
+	char *divlinea;
 
-	char *div;
+	float matrix[Np][7];
 
-	while(fgets(linea_temp, l, coordenadas))
+	int i, j;
+
+	float num;
+
+	for (i = 0; i < Np; i++)
 	{
-		printf("Fila: %s", linea_temp);
-		div = strtok(linea_temp, delimiter);
+			fgets(linea_temp, l, coordenadas);
+			divlinea = strtok(linea_temp, ",");
+			for (j = 0; j < 8; j++)
+			{
+					if(j != 0)
+					{
+							matrix[i][j-1] = atof(divlinea);
+					}
+					divlinea = strtok(NULL, ",");
+			}
 	}
+	printf("%p\n", divlinea);
 }
+
+
 
 int almacena()
 {
-	
+
 }
+
+/*
+int array[1000];
+
+int i=0;
+while(!coordenadas.eof()){
+coordenadas>>array[i];
+i++;
+}
+*/
