@@ -126,6 +126,14 @@ void leapFrog(void)
 						Y[i, n+1] = Y[i, n] + V05Y[i]*dt;
 						Z[i, n+1] = Z[i, n] + V05Z[i]*dt;
 				}
+				//3) V (Se necesita  fuera del anterior for para que todas las pos x,y,x estén calculadas)
+				for(i = 0; i < Np; i++)
+				{
+						acelera(i, n+1, &ax, &ay, &az);
+						VX[i, n+1] = V05X[i] + 0.5*ax*dt;
+						VY[i, n+1] = V05Y[i] + 0.5*ay*dt;
+						VZ[i, n+1] = V05Z[i] + 0.5*az*dt;
+				}
 	}
 }
 
