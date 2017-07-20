@@ -5,11 +5,11 @@
 #include <string.h>
 
 #define Np 10
+#define PI 3.14159265358979323846
 
 float *M, *X, *Y, *Z, *VX, *VY, *VZ, *V05X, *V05Y, *V05Z;
 int Nt;
-
-
+float G;
 
 //Convierte entre los indices (Pointers) de un arreglo lineal y de una matriz
 int pos(int i, int j)
@@ -76,10 +76,33 @@ void leer(void)
 	fclose(coordenadas);
 }
 
+void acelera(int i, int n, float *ax, float *ay, float *az)
+{
+    int ii;
+    float dx, dy, dz, r, factor;
 
+    *ax = 0;
+    *ay = 0;
+    *az = 0;
+
+    for(ii = 0; ii < Np; ii++)
+    {
+        if (ii != i)
+        {
+            dx = X[pos(ii, n)] - X[pos(i, n)];
+            dy = Y[pos(ii, n)] - Y[pos(i, n)];
+            dz = Z[pos(ii, n)] - Z[pos(i, n)];
+            r = pow(dx*dx + dy*dy + dz*dz, 3.0/2.0);
+            factor = G*M[ii]/r;
+            *ax += factor * dx;
+            *ay += factor * dy;
+            *az += factor * dz;
+        }
+    }
+}
 
 
 int main()
 {
-
+	G = 4*pow(PI,2.);
 }
