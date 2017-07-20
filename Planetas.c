@@ -6,6 +6,7 @@
 
 #define Np 10
 #define PI 3.14159265358979323846
+#define dt 0.05
 
 float *M, *X, *Y, *Z, *VX, *VY, *VZ, *V05X, *V05Y, *V05Z;
 int Nt;
@@ -76,6 +77,8 @@ void leer(void)
 	fclose(coordenadas);
 }
 
+
+
 void acelera(int i, int n, float *ax, float *ay, float *az)
 {
     int ii;
@@ -102,7 +105,29 @@ void acelera(int i, int n, float *ax, float *ay, float *az)
 }
 
 
+
+void leapFrog(void)
+{
+	//Tiene que usar las aceleraciones
+}
+
+
+
+void generatxt(void)
+{
+
+}
+
+
+
 int main()
 {
 	G = 4*pow(PI,2.);
+	Nt = 252/dt;
+
+	leer();
+	leapFrog();
+	generatxt();
+
+	return 0;
 }
