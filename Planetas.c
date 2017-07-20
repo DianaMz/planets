@@ -108,7 +108,20 @@ void acelera(int i, int n, float *ax, float *ay, float *az)
 
 void leapFrog(void)
 {
-	//Tiene que usar las aceleraciones
+	int n, i;
+	float ax, ay, az;
+
+	for (n = 0; n < Nt-1; n++)
+	{
+			for (i = 0; i < Np; i++)
+			{
+				//Segun Leapfrog 1) Velocidades intermedias
+					acelera(i, n, &ax, &ay, &az);
+					V05X[i] = VX[i, n] + 0.5*ax*dt;
+					V05Y[i] = VY[i, n] + 0.5*ay*dt;
+					V05Z[i] = VZ[i, n] + 0.5*az*dt;
+				}
+	}
 }
 
 
