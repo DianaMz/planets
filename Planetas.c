@@ -120,6 +120,11 @@ void leapFrog(void)
 					V05X[i] = VX[i, n] + 0.5*ax*dt;
 					V05Y[i] = VY[i, n] + 0.5*ay*dt;
 					V05Z[i] = VZ[i, n] + 0.5*az*dt;
+
+					//2) calculo de la posicion sig
+						X[i, n+1] = X[i, n] + V05X[i]*dt;
+						Y[i, n+1] = Y[i, n] + V05Y[i]*dt;
+						Z[i, n+1] = Z[i, n] + V05Z[i]*dt;
 				}
 	}
 }
