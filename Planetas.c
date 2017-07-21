@@ -6,7 +6,7 @@
 
 #define Np 10
 #define PI 3.14159265358979323846
-#define dt 0.05
+#define dt 0.025
 
 float *M, *X, *Y, *Z, *VX, *VY, *VZ, *V05X, *V05Y, *V05Z;
 int Nt;
