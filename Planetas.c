@@ -141,7 +141,32 @@ void leapFrog(void)
 
 void generatxt(void)
 {
+    int i, j;
 
+    FILE *filex, *filey, *filez;
+
+    filex = fopen("xs.txt", "w");
+    filey = fopen("ys.txt", "w");
+    filez = fopen("zs.txt", "w");
+
+    fprintf(filex, "Sol Mercurio Venus Tierra Marte Jupiter Saturno Urano Neptuno Pluton\n");
+    fprintf(filey, "Sol Mercurio Venus Tierra Marte Jupiter Saturno Urano Neptuno Pluton\n");
+    fprintf(filez, "Sol Mercurio Venus Tierra Marte Jupiter Saturno Urano Neptuno Pluton\n");
+    for (j = 0; j < Nt; j++)
+    {
+        for (i = 0; i < Np; i++)
+        {
+            fprintf(filex, "%f ", X[pos(i, j)]);
+            fprintf(filey, "%f ", Y[pos(i, j)]);
+            fprintf(filez, "%f ", Z[pos(i, j)]);
+        }
+        fprintf(filex, "\n");
+        fprintf(filey, "\n");
+        fprintf(filez, "\n");
+    }
+    fclose(filex);
+    fclose(filey);
+    fclose(filez);
 }
 
 
