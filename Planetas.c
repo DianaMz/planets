@@ -108,33 +108,32 @@ void acelera(int i, int n, float *ax, float *ay, float *az)
 
 void leapFrog(void)
 {
-	int n, i;
-	float ax, ay, az;
+    // make simulation
+    int n, i;
+    float ax, ay, az;
 
-	for (n = 0; n < Nt-1; n++)
-	{
-			for (i = 0; i < Np; i++)
-			{
-				//Segun Leapfrog 1) Velocidades intermedias
-					acelera(i, n, &ax, &ay, &az);
-					V05X[i] = VX[i, n] + 0.5*ax*dt;
-					V05Y[i] = VY[i, n] + 0.5*ay*dt;
-					V05Z[i] = VZ[i, n] + 0.5*az*dt;
+    for (n = 0; n < Nt-1; n++)
+    {
+        for (i = 0; i < Np; i++)
+        {
+            acelera(i, n, &ax, &ay, &az);
+            V05X[i] = VX[pos(i, n)] + 0.5*ax*dt;
+            V05Y[i] = VY[pos(i, n)] + 0.5*ay*dt;
+            V05Z[i] = VZ[pos(i, n)] + 0.5*az*dt;
 
-					//2) calculo de la posicion sig
-						X[i, n+1] = X[i, n] + V05X[i]*dt;
-						Y[i, n+1] = Y[i, n] + V05Y[i]*dt;
-						Z[i, n+1] = Z[i, n] + V05Z[i]*dt;
-				}
-				//3) V (Se necesita  fuera del anterior for para que todas las pos x,y,x estén calculadas)
-				for(i = 0; i < Np; i++)
-				{
-						acelera(i, n+1, &ax, &ay, &az);
-						VX[i, n+1] = V05X[i] + 0.5*ax*dt;
-						VY[i, n+1] = V05Y[i] + 0.5*ay*dt;
-						VZ[i, n+1] = V05Z[i] + 0.5*az*dt;
-				}
-	}
+            X[pos(i, n+1)] = X[pos(i, n)] + V05X[i]*dt;
+            Y[pos(i, n+1)] = Y[pos(i, n)] + V05Y[i]*dt;
+            Z[pos(i, n+1)] = Z[pos(i, n)] + V05Z[i]*dt;
+        }
+
+        for(i = 0; i < Np; i++)
+        {
+            acelera(i, n+1, &ax, &ay, &az);
+            VX[pos(i, n+1)] = V05X[i] + 0.5*ax*dt;
+            VY[pos(i, n+1)] = V05Y[i] + 0.5*ay*dt;
+            VZ[pos(i, n+1)] = V05Z[i] + 0.5*az*dt;
+        }
+    }
 }
 
 
